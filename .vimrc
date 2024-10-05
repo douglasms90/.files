@@ -7,7 +7,8 @@ if executable(s:clip)
   augroup END
 endif
 
-set nu!
+set nocompatible " Desabilitar a compatibilidade com vi, que pode causar problemas inesperados.
+set number " Adicionar numeração ao lado esquerdo de cada linha.
 set relativenumber
 set tabstop=2
 set shiftwidth=2
@@ -20,7 +21,11 @@ set nowrap
 set smartindent " Ativa identação inteligente, o Vim tentará advinhar a melhor identação para o código quando efetuar a quebra de linha
 set history=1000 " Por padrão o Vim amarzena os últimos 50 comandos utilizados no histórico. Alterei para 1000
 syntax on " Ativar sintax colorida
-
+filetype on " Habilitar a detecção do tipo de arquivo. O Vim será capaz de tentar detectar automaticamente o tipo de arquivo.
+filetype plugin on " Habilitar plug-ins e carregar o plug-in correspondente ao tipo de arquivo detectado.
+filetype indent on " Carregar um arquivo de indentação correspondente ao tipo de arquivo detectado.
+syntax on " Ativar o realce de sintaxe.
+set cursorline " Destacar a linha do cursor horizontalmente, diretamente abaixo dele.
 
 " https://github.com/junegunn/vim-plug
 

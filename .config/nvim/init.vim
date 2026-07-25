@@ -1,15 +1,15 @@
-call plug#begin('~/.vim/plugged')		" Instalar antes: => https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged')		        " Instalar antes: => https://github.com/junegunn/vim-plug
 
-Plug 'vim-airline/vim-airline'          " Add airline
-Plug 'vim-airline/vim-airline-themes'   " Add themes for airline
-Plug 'ellisonleao/gruvbox.nvim'         " Theme gruvbox
-Plug 'ryanoasis/vim-devicons'           " Add icon and airline
-Plug 'sheerun/vim-polyglot'             " Highlights for all linguages
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ellisonleao/gruvbox.nvim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-lua/plenary.nvim'
@@ -46,7 +46,7 @@ set autoread		    " Update vim after file update from outside
 set wildmenu
 set laststatus=2
 set mouse=a		    	" Active mouse
-set nowrap
+set nowrap              " Remover quebra de linha
 set history=1000 	    " Por padrão o Vim amarzena os últimos 50 comandos utilizados no histórico. Alterei para 1000
 syntax on 			    " Ativar o realce de sintaxe.
 set cursorline 		    " Destacar a linha do cursor horizontalmente, diretamente abaixo dele.
@@ -54,13 +54,13 @@ filetype on 		    " Habilitar a detecção do tipo de arquivo. O Vim será capaz
 filetype plugin on 	    " Habilitar plug-ins e carregar o plug-in correspondente ao tipo de arquivo detectado.
 filetype indent on 	    " Carregar um arquivo de indentação correspondente ao tipo de arquivo detectado.
 
-" Remaps """"""
-" remaps aqui
+" Meus remaps -------------------------------------------------------------------------------------
+let masterleader = "\\"
 
-" autocmd """"""
+" Meus autocmd ------------------------------------------------------------------------------------
 " autocmds aqui
 
-" WSL yank support
+" WSL yank support --------------------------------------------------------------------------------
 let s:clip = '/mnt/c/Windows/System32/clip.exe'  "Change this path according to your mount point
 if executable(s:clip)
   augroup WSLYank
@@ -69,16 +69,18 @@ if executable(s:clip)
   augroup END
 endif
 
-" AirLine "
+" AirLine -----------------------------------------------------------------------------------------
 let g:airline#extensions#tabline#enable = 1
 let g:airline_powerline_fonts = 1
+
+" AirLine Theme -----------------------------------------------------------------------------------
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 
 " NerdTree
 nmap <C-e> :NERDTreeToggle<CR>
 
-" ALE
+" Ale ---------------------------------------------------------------------------------------------
 let g:ale_linters = {
 \   'python': ['flake8', 'pyright', 'bandit']}
 
@@ -88,8 +90,16 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 
-" COC (Conquer of Completion)
+" Use preset argument to open it
+nmap <space>ed <Cmd>CocCommand explorer --preset .vim<CR>
+nmap <space>ef <Cmd>CocCommand explorer --preset floating<CR>
+nmap <space>ec <Cmd>CocCommand explorer --preset cocConfig<CR>
+nmap <space>eb <Cmd>CocCommand explorer --preset buffer<CR>
 
+" List all presets
+nmap <space>el <Cmd>CocList explPresets<CR>
+
+" CoC (Conquer of Completion) ---------------------------------------------------------------------
 let g:coc_global_extensions = [ 'coc-snippets', 'coc-explorer' ]
 
 " https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
@@ -253,7 +263,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-" Coc Explorer
+" Coc Explorer ------------------------------------------------------------------------------------
 let g:coc_explorer_global_presets = {
 \   '.vim': {
 \     'root-uri': '~/.vim',
@@ -297,12 +307,3 @@ let g:coc_explorer_global_presets = {
 \     'sources': [{'name': 'buffer', 'expand': v:true}]
 \   },
 \ }
-
-" Use preset argument to open it
-nmap <space>ed <Cmd>CocCommand explorer --preset .vim<CR>
-nmap <space>ef <Cmd>CocCommand explorer --preset floating<CR>
-nmap <space>ec <Cmd>CocCommand explorer --preset cocConfig<CR>
-nmap <space>eb <Cmd>CocCommand explorer --preset buffer<CR>
-
-" List all presets
-nmap <space>el <Cmd>CocList explPresets<CR>
